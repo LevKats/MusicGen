@@ -8,8 +8,9 @@ from mido import MidiTrack
 
 
 def main():
-    extractor = FeatureExtractor("schubert_ave_maria_PNO.mid")
+    extractor = FeatureExtractor("Соната 4.mid")
     extractor.parse()
+    extractor.power2_decomposition()
     print(len(extractor.features))
     print("\n".join(map(str, extractor.features)))
     features = extractor.encode_features(2)
@@ -27,7 +28,7 @@ def main():
         decoded_feature = extractor.coder.decode(num)[0]
         if decoded_feature.type == Type.NOTE:
             track.append(Message(
-                'note_on', note=decoded_feature.note, velocity=64, time=max(int(time), 32)
+                'note_on', note=decoded_feature.note, velocity=64, time=int(time)
             ))
             track.append(Message(
                 'note_off', note=decoded_feature.note, velocity=127,

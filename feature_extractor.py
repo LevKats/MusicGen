@@ -76,6 +76,25 @@ class FeatureExtractor:
             else:
                 pass
 
+    def power2_decomposition(self):
+        temp = self.features
+        self.features = []
+        mask = (
+            0b100000,
+            0b1000000,
+            0b10000000,
+            0b100000000,
+        )
+        for feature in temp:
+            duration = int(feature.duration)
+            for m in mask[::-1]:
+                if duration & m:
+                    self.features.append(
+                        Feature(type=feature.type,
+                                note=feature.note, duration=m)
+                    )
+                    break
+
     def encode_features(self, order=2):
         self.coder = FeaturesToInt()
         self.encoded_features = tuple(get_ngrams(map(
