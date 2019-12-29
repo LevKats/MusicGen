@@ -8,12 +8,12 @@ from mido import MidiTrack
 
 
 def main():
-    extractor = FeatureExtractor("Соната 4.mid")
+    extractor = FeatureExtractor("schubert_ave_maria_PNO.mid")
     extractor.parse()
     extractor.power2_decomposition()
     print(len(extractor.features))
     print("\n".join(map(str, extractor.features)))
-    features = extractor.encode_features(2)
+    features = extractor.encode_features(4)
     model = ChainModel()
     model.fit(features)
     res = model.predict(200, np.random.choice(

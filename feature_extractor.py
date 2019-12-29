@@ -84,6 +84,8 @@ class FeatureExtractor:
             0b1000000,
             0b10000000,
             0b100000000,
+            0b1000000000,
+            0b10000000000
         )
         for feature in temp:
             duration = int(feature.duration)
